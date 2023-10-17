@@ -28,7 +28,7 @@ function checkAnswer(roomId) {
                 fadeOut(document.getElementById(roomId));
                 fadeIn(document.getElementById('room2'));
             } else {
-                alert('Incorrect answer. Try again!');
+                window.open('popup.html', 'Popup', 'width=300,height=200');
             }
             break;
         case 'room2':
@@ -36,20 +36,21 @@ function checkAnswer(roomId) {
                 fadeOut(document.getElementById(roomId));
                 fadeIn(document.getElementById('room3'));
             } else {
-                alert('Incorrect answer. Try again!');
+                window.open('popup.html', 'Popup', 'width=300,height=200');
             }
             break;
         case 'room3':
             if (userInput === 'answer3') {
                 showWinner();
             } else {
-                alert('Incorrect answer. Try again!');
+                window.open('popup.html', 'Popup', 'width=300,height=200');
             }
             break;
         default:
             break;
     }
 }
+
 
 function showWinner() {
     var winnerElement = document.getElementById('winner');
