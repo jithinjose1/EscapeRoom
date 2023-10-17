@@ -1,36 +1,22 @@
 function fadeIn(element) {
-    element.style.opacity = 0;
-    element.style.display = 'block';
-
-    var fadeInterval = setInterval(function() {
-        element.style.opacity = parseFloat(element.style.opacity) + 0.1;
-        if (parseFloat(element.style.opacity) >= 1) {
-            clearInterval(fadeInterval);
-        }
-    }, 100);
+    anime({
+        targets: element,
+        opacity: [0, 1],
+        duration: 1000,
+        easing: 'linear'
+    });
 }
 
 function fadeOut(element) {
-    element.style.opacity = 1;
-
-    var fadeInterval = setInterval(function() {
-        element.style.opacity = parseFloat(element.style.opacity) - 0.1;
-        if (parseFloat(element.style.opacity) <= 0) {
-            clearInterval(fadeInterval);
+    anime({
+        targets: element,
+        opacity: [1, 0],
+        duration: 1000,
+        easing: 'linear',
+        complete: function() {
             element.style.display = 'none';
         }
-    }, 100);
-}
-
-function showWinner() {
-    var winnerElement = document.getElementById('winner');
-    winnerElement.style.display = 'block';
-    winnerElement.classList.add('winnerAnimation');
-
-    var rooms = document.getElementsByClassName('room');
-    for (var i = 0; i < rooms.length; i++) {
-        rooms[i].style.display = 'none';
-    }
+    });
 }
 
 function checkAnswer(roomId) {
@@ -55,7 +41,7 @@ function checkAnswer(roomId) {
             break;
         case 'room3':
             if (userInput === 'answer3') {
-                alert('Congratulations! You escaped the virtual room!');
+                showWinner();
             } else {
                 alert('Incorrect answer. Try again!');
             }
@@ -65,14 +51,15 @@ function checkAnswer(roomId) {
     }
 }
 
-/*
-
 function showWinner() {
-    document.getElementById('winner').style.display = 'block';
-    document.getElementById('room3').style.display = 'none';
-    document.getElementById('room2').style.display = 'none';
-    document.getElementById('room1').style.display = 'none';
-    document.getElementById('winner').classList.add('winner');
-}
+    var winnerElement = document.getElementById('winner');
+    winnerElement.style.display = 'block';
 
-*/
+    anime({
+        targets: winnerElement,
+        scale: [1, 1.2],
+        opacity: [1, 0],
+        duration: 1000,
+        easing: 'easeOutCubic'
+    });
+}
